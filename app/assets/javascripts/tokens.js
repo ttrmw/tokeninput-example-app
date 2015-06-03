@@ -1,3 +1,3 @@
 $( function() { 
-  $('#article_tokenized_tags').tokenInput(); 
+  $('#article_tokenized_tags').tokenInput('/tags.json');
 });

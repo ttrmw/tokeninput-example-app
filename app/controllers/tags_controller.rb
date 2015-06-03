@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  around_action :token_query, only: :index
 
   # GET /tags
   # GET /tags.json
@@ -71,4 +72,20 @@ class TagsController < ApplicationController
     def tag_params
       params.require(:tag).permit(:name, :description)
     end
-end
+
+    def token_params
+      params.permit(:q)
+    end
+
+    def token_query
+      if token_params[:q].present?
+        @tags = Tag.where("name like ?", "%#{token_params[:q]}%")
+        respond_to do |format|
+          format.json { render json: @tags } 
+        end
+      else 
+        yield
+      end
+    end
+
+ end
