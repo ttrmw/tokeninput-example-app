@@ -50,3 +50,5 @@ group :development do
 	gem 'libnotify'
   gem 'guard-minitest'
 end
+
+gem 'jquery-tokeninput-rails'
